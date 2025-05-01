@@ -40,6 +40,12 @@ local function install_package(pkg, version)
 end
 
 function M.try_install(mason_linter_identifier)
+    -- WORKAROUND: issue #22
+    -- ref: https://github.com/rshkarin/mason-nvim-lint/issues/22#issuecomment-2842345227
+    if not mason_linter_identifier then
+        return
+    end
+
     local Package = require "mason-core.package"
     local package_name, version = Package.Parse(mason_linter_identifier)
 
